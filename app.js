@@ -67,7 +67,7 @@ async function handleGpsError(error) {
     document.getElementById("location-display").innerText = "GPS blockiert. Versuche IP-Ortung...";
 
     try {
-        // Stufe 2: Externe, hochpräzise IP-API abfragen
+        // Stufe 2: Externe, hochpräzise IP-API abfragen (ersetzt das fehlerhafte /geo)
         const response = await fetch('https://ipapi.co/json/');
         const geoData = await response.json();
 
@@ -96,7 +96,6 @@ async function handleGpsError(error) {
     document.getElementById("anchor-type").innerText = "Warte auf Input...";
     document.getElementById("manual-location").style.display = "block";
 }
-
 // Stufe 3 Ausführung: Verarbeitet die Button-Klicks des manuellen Menüs
 function setManualLocation() {
     const lat = parseFloat(document.getElementById("manual-lat").value);
