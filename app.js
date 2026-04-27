@@ -59,7 +59,7 @@ function calculateAndRenderDecTime() {
     const format = (num) => num.toString().padStart(2, '0');
     
     document.getElementById("dectime-display").innerText = 
-        `${decHours}.${format(decMinutes)}.${format(decSeconds)}`;
+        `${decHours},${format(decMinutes)};${format(decSeconds)}`;
 }
 
 // Fallback-Stufe 2 & 3: IP-Ortung (via ipapi.co) und Manuelle Eingabe
