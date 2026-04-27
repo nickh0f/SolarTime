@@ -1,26 +1,67 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Global DecTime System</title>
     <style>
-        body { font-family: 'Courier New', Courier, monospace; background-color: #121212; color: #00ffcc; text-align: center; padding-top: 10vh; margin: 0; }
-        h1 { font-size: 5rem; margin: 10px 0; letter-spacing: 5px; }
-        .panel { border: 1px solid #333; display: inline-block; padding: 20px 40px; border-radius: 10px; background: #1a1a1a; box-shadow: 0 4px 15px rgba(0, 255, 204, 0.1); }
-        .status { font-size: 1rem; color: #888; margin: 5px 0; }
-        .alert { color: #ff5555; }
-        input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; } /* Entfernt Pfeile bei Nummernfeldern */
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #121212;
+            color: #00ffcc;
+            text-align: center;
+            padding-top: 10vh;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 5rem;
+            margin: 10px 0;
+            letter-spacing: 5px;
+        }
+
+        .panel {
+            border: 1px solid #333;
+            display: inline-block;
+            padding: 20px 40px;
+            border-radius: 10px;
+            background: #1a1a1a;
+            box-shadow: 0 4px 15px rgba(0, 255, 204, 0.1);
+        }
+
+        .status {
+            font-size: 1rem;
+            color: #888;
+            margin: 5px 0;
+        }
+
+        .alert {
+            color: #ff5555;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Entfernt Pfeile bei Nummernfeldern */
     </style>
 </head>
+
 <body>
     <div class="panel">
         <div class="status" id="location-display">Initialisiere GPS Sensoren...</div>
 
-        <div id="manual-location" style="display: none; margin-top: 15px; margin-bottom: 15px; border-top: 1px dashed #333; padding-top: 15px;">
-            <input type="number" id="manual-lat" placeholder="Breitengrad" step="0.0001" style="width: 120px; padding: 8px; background: #222; border: 1px solid #00ffcc; color: #fff; border-radius: 4px;">
-            <input type="number" id="manual-lng" placeholder="Längengrad" step="0.0001" style="width: 120px; padding: 8px; background: #222; border: 1px solid #00ffcc; color: #fff; border-radius: 4px;">
-            <button onclick="setManualLocation()" style="padding: 8px 15px; cursor: pointer; background: #00ffcc; color: #000; border: none; font-weight: bold; border-radius: 4px; margin-left: 5px;">Setzen</button>
+        <div id="manual-location"
+            style="display: none; margin-top: 15px; margin-bottom: 15px; border-top: 1px dashed #333; padding-top: 15px;">
+            <input type="number" id="manual-lat" placeholder="Breitengrad" step="0.0001"
+                style="width: 120px; padding: 8px; background: #222; border: 1px solid #00ffcc; color: #fff; border-radius: 4px;">
+            <input type="number" id="manual-lng" placeholder="Längengrad" step="0.0001"
+                style="width: 120px; padding: 8px; background: #222; border: 1px solid #00ffcc; color: #fff; border-radius: 4px;">
+            <button onclick="setManualLocation()"
+                style="padding: 8px 15px; cursor: pointer; background: #00ffcc; color: #000; border: none; font-weight: bold; border-radius: 4px; margin-left: 5px;">Setzen</button>
         </div>
 
         <div class="status">0.0h Ankerpunkt: <span id="anchor-type" style="color: #fff;">Warten...</span></div>
@@ -28,10 +69,18 @@
         <div class="status">Mean DecTime (10h / 100m / 100s)</div>
 
         <br>
-        <canvas id="sun-graph" width="300" height="120" style="margin-top: 15px; border: 1px dashed #333; border-radius: 5px; background: #111;"></canvas>
+        <div class="status" style="margin-top: 15px;">Tagesverlauf (Sonnenhöhe)</div>
+        <canvas id="sun-graph" width="300" height="120"
+            style="margin-top: 5px; border: 1px dashed #333; border-radius: 5px; background: #111;"></canvas>
+
+        <br>
+        <div class="status" style="margin-top: 15px;">Jahresverlauf (Tageslänge in Stunden)</div>
+        <canvas id="year-graph" width="300" height="120"
+            style="margin-top: 5px; border: 1px dashed #333; border-radius: 5px; background: #111;"></canvas>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/suncalc/1.8.0/suncalc.min.js"></script>
     <script src="app.js"></script>
 </body>
+
 </html>
