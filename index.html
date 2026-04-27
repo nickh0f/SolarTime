@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Global DecTime System</title>
     <style>
-        body { font-family: 'Courier New', Courier, monospace; background-color: #121212; color: #00ffcc; text-align: center; padding-top: 15vh; margin: 0; }
+        body { font-family: 'Courier New', Courier, monospace; background-color: #121212; color: #00ffcc; text-align: center; padding-top: 10vh; margin: 0; }
         h1 { font-size: 5rem; margin: 10px 0; letter-spacing: 5px; }
         .panel { border: 1px solid #333; display: inline-block; padding: 20px 40px; border-radius: 10px; background: #1a1a1a; box-shadow: 0 4px 15px rgba(0, 255, 204, 0.1); }
         .status { font-size: 1rem; color: #888; margin: 5px 0; }
@@ -26,6 +26,9 @@
         <div class="status">0.0h Ankerpunkt: <span id="anchor-type" style="color: #fff;">Warten...</span></div>
         <h1 id="dectime-display">--.--.--</h1>
         <div class="status">Mean DecTime (10h / 100m / 100s)</div>
+
+        <br>
+        <canvas id="sun-graph" width="300" height="120" style="margin-top: 15px; border: 1px dashed #333; border-radius: 5px; background: #111;"></canvas>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/suncalc/1.8.0/suncalc.min.js"></script>
