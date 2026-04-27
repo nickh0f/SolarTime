@@ -62,21 +62,21 @@ function calculateAndRenderDecTime() {
         `${decHours}.${format(decMinutes)}.${format(decSeconds)}`;
 }
 
-// Fallback-Stufe 2 & 3: IP-Ortung und Manuelle Eingabe
+// Fallback-Stufe 2 & 3: IP-Ortung (via ipapi.co) und Manuelle Eingabe
 async function handleGpsError(error) {
     document.getElementById("location-display").innerText = "GPS blockiert. Versuche IP-Ortung...";
 
     try {
-        // Stufe 2: Cloudflare IP-Backend anfragen
-        const response = await fetch('/geo');
+        // Stufe 2: Externe, hochpräzise IP-API abfragen
+        const response = await fetch('https://ipapi.co/json/');
         const geoData = await response.json();
 
-        // Wenn Geodaten vorhanden sind, Uhr mit IP-Daten starten
-        if (geoData.lat && geoData.lng) {
+        // ipapi.co nennt die Felder 'latitude' und 'longitude'
+        if (geoData.latitude && geoData.longitude) {
             const mockPosition = {
                 coords: {
-                    latitude: parseFloat(geoData.lat),
-                    longitude: parseFloat(geoData.lng)
+                    latitude: parseFloat(geoData.latitude),
+                    longitude: parseFloat(geoData.longitude)
                 }
             };
             
@@ -84,11 +84,11 @@ async function handleGpsError(error) {
             
             // Nutzer-Info anpassen
             document.getElementById("location-display").innerHTML = 
-                `Lat: ${parseFloat(geoData.lat).toFixed(4)}°, Lng: ${parseFloat(geoData.lng).toFixed(4)}° (via IP: ${geoData.city})`;
-            return; // Beendet die Fehlerbehandlung hier, manuelles Menü bleibt versteckt
+                `Lat: ${parseFloat(geoData.latitude).toFixed(4)}°, Lng: ${parseFloat(geoData.longitude).toFixed(4)}° (via IP: ${geoData.city})`;
+            return; // Beendet die Fehlerbehandlung, manuelles Menü bleibt versteckt
         }
     } catch (e) {
-        console.warn("IP-Ortung fehlgeschlagen oder lokal getestet", e);
+        console.warn("Externe IP-Ortung fehlgeschlagen", e);
     }
 
     // Stufe 3: Manuelles Fallback-Menü einblenden
